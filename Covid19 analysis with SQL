@@ -1,0 +1,81 @@
+select *
+from `my-project-april-09.covid_19_data.covid deaths`
+order by 3,4
+
+select *
+from `my-project-april-09.covid_19_data.covid vaccination`
+order by 3,4
+
+--selecting data that we are going to use
+
+select Location, date, total_cases, total_deaths, population
+from `my-project-april-09.covid_19_data.covid deaths`
+order by 1,2
+
+-- looking at total cases vs total deaths
+-- likelihood of dying if infected by covid
+
+select Location, date, total_cases, total_deaths,(total_deaths/total_cases)*100 AS death_percentage
+from `my-project-april-09.covid_19_data.covid deaths`
+where location like '%India%'
+order by 1,2
+
+-- Looking at total cases vs population
+-- percentage of people got covid
+
+select Location, date, total_cases,population,(total_cases/population)*100 AS infection_rate
+from `my-project-april-09.covid_19_data.covid deaths`
+--where location like '%India%'
+order by 1,2
+
+-- Countries with highest infection rate
+
+select Location, MAX(total_cases) as highest_infection_count,population,MAX((total_cases/population))*100 AS infection_rate
+from `my-project-april-09.covid_19_data.covid deaths`
+--where location like '%India%'
+group by location, population
+order by infection_rate desc
+
+-- Countries with highest death count per population
+
+select Location, MAX(total_deaths) as total_death_count
+from `my-project-april-09.covid_19_data.covid deaths`
+--where location like '%India%'
+where continent is not null
+group by location
+order by total_death_count desc
+
+-- continent with highest death_count
+
+select continent, MAX(total_deaths) as total_death_count
+from `my-project-april-09.covid_19_data.covid deaths`
+--where location like '%India%'
+where continent is not null
+group by continent
+order by total_death_count desc
+
+--Global numbers
+
+select date, sum(new_cases) as total_cases, sum(new_deaths) as total_deaths, sum(new_deaths)/sum(new_cases)*100 AS death_percentage
+from `my-project-april-09.covid_19_data.covid deaths`
+--where location like '%India%'
+where continent is not null
+group by date
+order by 1,2
+
+--Joining covid deaths table with covid vacination dataset based on location and date
+
+select *
+from `my-project-april-09.covid_19_data.covid deaths` dea
+join `my-project-april-09.covid_19_data.covid vaccination` vac
+on dea.location = vac.location
+and dea.date = vac.date
+
+--Looking at total population vs vaccination
+select dea.continent, dea.location, dea.date, dea.population, vac.new_vaccinations, sum(vac.new_vaccinations) over (partition by dea.location order by dea.location, dea.date) as rollingpeoplevaccination
+from `my-project-april-09.covid_19_data.covid deaths` dea
+join `my-project-april-09.covid_19_data.covid vaccination` vac
+on dea.location = vac.location
+and dea.date = vac.date
+where dea.continent is not null  
+order by 2,3
