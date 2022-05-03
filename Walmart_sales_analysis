@@ -1,0 +1,150 @@
+SELECT *
+  FROM `my-project-april-09.Walmart_sales_forecast.Walmart_sales`
+
+  --Lets select the column for analysis
+
+  SELECT store, dept, date, Weekly_Sales
+  from `my-project-april-09.Walmart_sales_forecast.Walmart_sales`
+  order by date desc
+  
+  -- Latest week sales performance 26/10/2012
+
+   SELECT store, date, AVG(Weekly_Sales) as avg_sales
+  from `my-project-april-09.Walmart_sales_forecast.Walmart_sales`
+  where date = '2012-10-26'
+  group by Store, date
+  order by avg_sales desc
+
+  -- 19/10/2012 week sale performance
+
+  SELECT store, date, AVG(Weekly_Sales) as avg_sales
+  from `my-project-april-09.Walmart_sales_forecast.Walmart_sales`
+  where date = '2012-10-19'
+  group by Store, date
+  order by avg_sales desc
+
+-- 12/10/2012 week sales performance
+
+ SELECT store, date, AVG(Weekly_Sales) as avg_sales
+  from `my-project-april-09.Walmart_sales_forecast.Walmart_sales`
+  where date = '2012-10-12'
+  group by Store, date
+  order by avg_sales desc
+
+  -- Overall sales performance for month oct2012
+
+   SELECT store,month, year, avg(Weekly_Sales) as avg_sales
+  from `my-project-april-09.Walmart_sales_forecast.Walmart_sales`
+  where month = 10 and year = 2012
+  group by Store, month, year
+  order by avg_sales desc
+
+  --- Overall sales performance for month september2012
+
+SELECT store,month, year, avg(Weekly_Sales) as avg_sales
+  from `my-project-april-09.Walmart_sales_forecast.Walmart_sales`
+  where month = 9 and year = 2012
+  group by Store, month, year
+  order by avg_sales desc
+
+  --- Overall sales performance for month August2012
+
+SELECT store,month, year, avg(Weekly_Sales) as avg_sales
+  from `my-project-april-09.Walmart_sales_forecast.Walmart_sales`
+  where month = 8 and year = 2012
+  group by Store, month, year
+  order by avg_sales desc
+
+
+-- Lets explore sales during thanksgiving
+
+SELECT store,date, Weekly_Sales, Thanksgiving 
+  from `my-project-april-09.Walmart_sales_forecast.Walmart_sales`
+  where Thanksgiving is TRUE
+  order by date desc
+
+
+-- sales during thanksgiving 2011
+
+SELECT store, year, month, AVG(Weekly_Sales) as avg_sales
+from `my-project-april-09.Walmart_sales_forecast.Walmart_sales`
+where Thanksgiving is true and year = 2011
+group by store, month, year
+order by avg_sales desc
+
+-- overall sales november2011
+
+SELECT store, year, month, AVG(Weekly_Sales) as avg_sales
+from `my-project-april-09.Walmart_sales_forecast.Walmart_sales`
+where year = 2011 and month = 11
+group by store, month, year
+order by avg_sales desc
+
+-- sales during thanksgiving 2010
+
+SELECT store, year, month, AVG(Weekly_Sales) as avg_sales
+from `my-project-april-09.Walmart_sales_forecast.Walmart_sales`
+where Thanksgiving is true and year = 2010
+group by store, month, year
+order by avg_sales desc
+
+
+--Overall average sales of stores during thanksgiving 2010 and 2011
+
+select  year, avg(weekly_sales) as avg_sales
+from `my-project-april-09.Walmart_sales_forecast.Walmart_sales`
+where Thanksgiving = true
+group by year
+
+
+
+-- Sales during christmas 2011
+
+SELECT store, year, month, AVG(Weekly_Sales) as avg_sales
+from `my-project-april-09.Walmart_sales_forecast.Walmart_sales`
+where christmas is true and year = 2011
+group by store, month, year
+order by avg_sales desc
+
+-- Sales during christmas 2010
+
+SELECT store, year, month, AVG(Weekly_Sales) as avg_sales
+from `my-project-april-09.Walmart_sales_forecast.Walmart_sales`
+where christmas is true and year = 2010
+group by store, month, year
+order by avg_sales desc
+
+
+--Overall average sales of stores during christmas 2010 and 2011
+
+select  year, avg(weekly_sales) as avg_sales
+from `my-project-april-09.Walmart_sales_forecast.Walmart_sales`
+where christmas = true
+group by year
+
+
+--Overall sales performance during year 2012
+
+SELECT store, year, month, AVG(Weekly_Sales) as avg_sales
+from `my-project-april-09.Walmart_sales_forecast.Walmart_sales`
+where year = 2012
+group by store, month, year
+order by avg_sales desc
+
+
+--Overall sales performance during year 2011
+
+SELECT store, year, month, AVG(Weekly_Sales) as avg_sales
+from `my-project-april-09.Walmart_sales_forecast.Walmart_sales`
+where year = 2011
+group by store, month, year
+order by avg_sales desc
+
+
+--Overall sales performance during year 2010
+
+SELECT store, year, month, AVG(Weekly_Sales) as avg_sales
+from `my-project-april-09.Walmart_sales_forecast.Walmart_sales`
+where year = 2010
+group by store, month, year
+order by avg_sales desc
