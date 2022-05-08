@@ -1,3 +1,116 @@
+--sales holiday vs working day
+
+select IsHoliday, Avg(weekly_sales)
+from `my-project-april-09.Walmart_sales_forecast.Walmart_sales`
+group by 1
+
+--christmas sales
+
+select christmas, Avg(weekly_sales)
+from `my-project-april-09.Walmart_sales_forecast.Walmart_sales`
+group by 1
+
+--thanksgiving sales
+
+select thanksgiving, Avg(weekly_sales) as AVG_sales
+from `my-project-april-09.Walmart_sales_forecast.Walmart_sales`
+group by 1
+
+--super_bowl sales
+
+select Super_Bowl, Avg(weekly_sales) as AVG_sales
+from `my-project-april-09.Walmart_sales_forecast.Walmart_sales`
+group by 1
+
+--Labor_day sales
+
+select Labor_Day, Avg(weekly_sales) as AVG_sales
+from `my-project-april-09.Walmart_sales_forecast.Walmart_sales`
+group by 1
+
+--christmas store type
+
+select christmas, Type, Avg(weekly_sales) as AVG_sales
+from `my-project-april-09.Walmart_sales_forecast.Walmart_sales`
+group by 1,2
+
+--Labor_day store type
+
+select Labor_Day, Type, Avg(weekly_sales) as AVG_sales
+from `my-project-april-09.Walmart_sales_forecast.Walmart_sales`
+group by 1,2
+
+--thanks_giving store type
+
+select Thanksgiving, Type, Avg(weekly_sales) as AVG_sales
+from `my-project-april-09.Walmart_sales_forecast.Walmart_sales`
+group by 1,2
+
+--Super_bowl store type
+
+select Super_Bowl, Type, Avg(weekly_sales) as AVG_sales
+from `my-project-april-09.Walmart_sales_forecast.Walmart_sales`
+group by 1,2
+
+--store percentage
+
+select Type, count(Type) as total, (count(Type)/420212)*100 as percentage
+from `my-project-april-09.Walmart_sales_forecast.Walmart_sales`
+group by 1
+
+--size - type relation
+
+select Type, Size
+from `my-project-april-09.Walmart_sales_forecast.Walmart_sales`
+group by 1,2
+
+--weekly sales by department
+
+select Dept, Avg(Weekly_Sales) as Avg_sales
+from `my-project-april-09.Walmart_sales_forecast.Walmart_sales`
+group by 1
+order by Avg_sales desc
+
+--weekly sales by store
+
+select Store, Avg(Weekly_Sales) as Avg_sales
+from `my-project-april-09.Walmart_sales_forecast.Walmart_sales`
+group by 1
+order by Avg_sales desc
+
+--sales by month and year
+
+select year, month, avg(Weekly_Sales) as Avg_sales
+from `my-project-april-09.Walmart_sales_forecast.Walmart_sales`
+group by 1,2
+
+
+--sales by month
+
+select month, avg(Weekly_Sales) as Avg_sales
+from `my-project-april-09.Walmart_sales_forecast.Walmart_sales`
+group by 1
+
+
+--sales by week and year
+
+select year, week, avg(Weekly_Sales) as Avg_sales
+from `my-project-april-09.Walmart_sales_forecast.Walmart_sales`
+group by 1,2
+
+--sales by week
+
+select week, avg(Weekly_Sales) as Avg_sales
+from `my-project-april-09.Walmart_sales_forecast.Walmart_sales`
+group by 1
+
+--sales by date and year
+
+select date, year, avg(Weekly_Sales) as Avg_sales
+from `my-project-april-09.Walmart_sales_forecast.Walmart_sales`
+group by 1,2
+
+
 SELECT *
   FROM `my-project-april-09.Walmart_sales_forecast.Walmart_sales`
 
